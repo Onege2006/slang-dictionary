@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+ <!-- Навигационный бар -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="{{ url_for('main') }}">Главная</a></li>
+            <li><a href="{{ url_for('home') }}">Поиск</a></li>
+<li><a href="{{ url_for('last_page') }}">Список</a></li>
+        </ul>
+    </nav>
+
+    <!-- Поиск + карточки -->
+    <div class="container">
+        <h1>Поиск по карточкам</h1>
+        <input type="text" id="search" placeholder="Поиск...">
+
+        <div class="cards">
+            <a href="{{ url_for('tik') }}" class="card" data-title="Го">
+                <h2>Го</h2>
+                <p>призыв к действию ("погнали")</p>
+            </a>
+            <a href="{{ url_for('aok') }}" class="card" data-title="Изи">
+                <h2>Изи</h2>
+                <p>что-то лёгкое, простое</p>
+            </a>
+            <a href="{{ url_for('bok') }}" class="card" data-title="Имба">
+                <h2>Имба</h2>
+                <p>что-то очень крутое, несбалансированное</p>
+            </a>
+
+            <a href="{{ url_for('cok') }}" class="card" data-title="Краш ">
+                <h2>Краш </h2>
+                <p>объект влюблённости</p>
+            </a>
+
+            <a href="{{ url_for('dok') }}" class="card" data-title="Кринж">
+                <h2>Кринж</h2>
+                <p>что-то неловкое, стыдное</p>
+            </a>
+
+            <a href="{{ url_for('eok') }}" class="card" data-title="Пикми">
+                <h2>Пикми</h2>
+                <p>человек, привлекающий внимание жалобами</p>
+            </a>
+
+            <a href="{{ url_for('ook') }}" class="card" data-title="По-факту">
+                <h2>По-факту </h2>
+                <p>правда, аргументировано</p>
+            </a>
+
+            <a href="{{ url_for('pok') }}" class="card" data-title="Пранк">
+                <h2>Пранк</h2>
+                <p>розыгрыш</p>
+            </a>
+<a href="{{ url_for('rok') }}" class="card" data-title="Рандом">
+                <h2>Рандом</h2>
+                <p>случайность, хаотичность</p>
+            </a>
+
+            <a href="{{ url_for('sok') }}" class="card" data-title="Токсик">
+                <h2>Токсик </h2>
+                <p>негативный, вредный человек</p>
+            </a>
+
+            <a href="{{ url_for('uok') }}" class="card" data-title="Трэш">
+                <h2>Трэш</h2>
+                <p>что-то ужасное, дичь</p>
+            </a>
+
+            <a href="{{ url_for('vok') }}" class="card" data-title="Чекнуть">
+                <h2>Чекнуть</h2>
+                <p>проверить, посмотреть</p>
+            </a>
+
+            <a href="{{ url_for('zok') }}" class="card" data-title="Чиллить">
+                <h2>Чиллить</h2>
+                <p>отдыхать, расслабляться</p>
+            </a>
+
+<a href="{{ url_for('wok') }}" class="card" data-title="Шарить">
+                <h2>Шарить</h2>
+    <p>разбираться в чём-то</p>
+            </a>
+
+
+
+        </div>
+    </div>
+  </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

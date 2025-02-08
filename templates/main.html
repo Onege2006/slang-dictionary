@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+</head>
+<style>
+  body {
+      font-family: Arial, sans-serif;
+    background-image: url("/static/images/fon.jpg"); /* Убедись, что путь правильный */
+    background-size: cover; /* Фон на весь экран */
+    background-position: center center; /* Центрируем */
+    background-repeat: no-repeat; /* Отключаем повтор */
+    height: 100vh; /* Высота на весь экран */
+}
+
+/* Если фон всё ещё не растягивается, попробуй так */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Полная ширина */
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(20px);
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Список ссылок */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Стили для ссылок */
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Эффект при наведении */
+.nav-links a:hover {
+    background: rgba(251, 247, 247, 0.5);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.66);
+    transform: scale(1.1);
+}
+
+/* Стили для иконок */
+.nav-links i {
+    font-size: 22px;
+}
+
+/* Контейнер */
+.container {
+    text-align: center;
+    padding-top: 100px;
+}
+</style>
+<body>
+
+ <!-- Навигационный бар -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="{{ url_for('main') }}">Главная</a></li>
+            <li><a href="{{ url_for('home') }}">Поиск</a></li>
+<li><a href="{{ url_for('last_page') }}">Список</a></li>
+        </ul>
+    </nav>
+
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

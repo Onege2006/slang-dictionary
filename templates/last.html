@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@400&display=swap");
+:root {
+	--adjust-size: 0px; /* 必要に応じて */
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html,
+body {
+	overscroll-behavior-x: none;
+	overscroll-behavior-y: none;
+	scroll-behavior: smooth;
+}
+
+main {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 100vw;
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+p {
+	line-height: 1;
+}
+a {
+	color: crimson;
+	text-decoration: none;
+}
+img {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+}
+#gallery {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Увеличил минимальную ширину */
+    gap: 20px;
+    max-width: 80%; /* Ограничил ширину галереи */
+    margin: 0 auto; /* Центрирование */
+    padding: 20px;
+    perspective: none; /* Если нет 3D-эффекта, можно убрать */
+}
+
+#gallery figure:nth-child(7n) {
+	--duration: 1s;
+	--pin-color: crimson;
+}
+#gallery figure:nth-child(7n + 1) {
+	--duration: 1.8s;
+	--pin-color: hotpink;
+}
+#gallery figure:nth-child(7n + 2) {
+	--duration: 1.3s;
+	--pin-color: magenta;
+}
+#gallery figure:nth-child(7n + 3) {
+	--duration: 1.5s;
+	--pin-color: orangered;
+}
+#gallery figure:nth-child(7n + 4) {
+	--duration: 1.1s;
+	--pin-color: darkorchid;
+}
+#gallery figure:nth-child(7n + 5) {
+	--duration: 1.6s;
+	--pin-color: deeppink;
+}
+#gallery figure:nth-child(7n + 6) {
+	--duration: 1.2s;
+	--pin-color: mediumvioletred;
+}
+#gallery figure:nth-child(3n) {
+	--angle: 3deg;
+}
+#gallery figure:nth-child(3n + 1) {
+	--angle: -3.3deg;
+}
+#gallery figure:nth-child(3n + 2) {
+	--angle: 2.4deg;
+}
+#gallery figure:nth-child(odd) {
+	--direction: alternate;
+}
+#gallery figure:nth-child(even) {
+	--direction: alternate-reverse;
+}
+#gallery figure {
+	--angle: 3deg;
+	--count: 5;
+	--duration: 1s;
+	--delay: calc(-0.5 * var(--duration));
+	--direction: alternate;
+	--pin-color: red;
+
+	position: relative;
+	display: inline-block;
+	margin: var(--adjust-size);
+	padding: 0.5rem;
+	border-radius: 5px;
+	box-shadow: 0 7px 8px rgba(0, 0, 0, 0.4);
+	width: 100%;
+	height: auto;
+	text-align: center;
+	background-color: ghostwhite;
+	background-image: url("https://images.unsplash.com/photo-1629968417850-3505f5180761?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTMzMjQ3ODJ8&ixlib=rb-4.0.3&q=80&w=500");
+	background-size: cover;
+	background-position: center;
+	background-blend-mode: multiply;
+
+	transform-origin: center 0.22rem;
+	will-change: transform;
+	break-inside: avoid;
+	overflow: hidden;
+	outline: 1px solid transparent;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+#gallery.active figure {
+	animation-duration: var(--duration), 1.5s;
+	animation-delay: var(--delay),
+		calc(var(--delay) + var(--duration) * var(--count));
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: var(--count), 1;
+	animation-direction: var(--direction), normal;
+	animation-fill-mode: both;
+	animation-name: swing, swingEnd;
+}
+#gallery figure:after {
+	position: absolute;
+	top: 0.22rem;
+	left: 50%;
+	width: 0.7rem;
+	height: 0.7rem;
+	content: "";
+	background: var(--pin-color);
+	border-radius: 50%;
+	box-shadow: -0.1rem -0.1rem 0.3rem 0.02rem rgba(0, 0, 0, 0.5) inset;
+	filter: drop-shadow(0.3rem 0.15rem 0.2rem rgba(0, 0, 0, 0.5));
+	transform: translateZ(0);
+	z-index: 2;
+}
+figure img {
+	aspect-ratio: 1 /1;
+	width: 100%;
+	object-fit: cover;
+	display: block;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	z-index: 1;
+}
+figure figcaption {
+	font-size: 14px;
+	font-weight: 400;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	z-index: 1;
+}
+figure h2 {
+	color: crimson;
+	font-size: 22px;
+}
+figure p {
+	font-size: 17px;
+}
+figure small {
+	font-size: 12px;
+}
+figure > div {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@keyframes swing {
+	0% {
+		transform: rotate3d(0, 0, 1, calc(-1 * var(--angle)));
+	}
+	100% {
+		transform: rotate3d(0, 0, 1, var(--angle));
+	}
+}
+@keyframes swingEnd {
+	to {
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+}
+#info {
+	position: relative;
+	text-align: center;
+	z-index: 1;
+}
+#info a {
+	font-size: 1.1rem;
+}
+/*
+@media (orientation: landscape) {
+	#gallery {
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	}
+}
+*/
+@media (min-width: 800px) {
+	#gallery {
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	}
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    color: white;
+}
+
+/* Навигационный бар */
+/* Навигационный бар */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Полная ширина */
+    background: rgba(255, 255, 255, 0.62);
+    backdrop-filter: blur(20px);
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Список ссылок */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+/* Стили для ссылок */
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Эффект при наведении */
+.nav-links a:hover {
+    background: rgba(251, 247, 247, 0.5);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.66);
+    transform: scale(1.1);
+}
+
+/* Стили для иконок */
+.nav-links i {
+    font-size: 22px;
+}
+
+/* Контейнер */
+.container {
+    text-align: center;
+    padding-top: 100px;
+}
+
+
+    </style>
+</head>
+<body>
+<!-- Навигационный бар -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="{{ url_for('main') }}">Главная</a></li>
+            <li><a href="{{ url_for('home') }}">Поиск</a></li>
+<li><a href="{{ url_for('last_page') }}">Список</a></li>
+        </ul>
+    </nav>
+<main>
+	<div id="gallery">
+		<figure>
+			<img src="https://img.championat.com/i/n/z/1623933842411161401.jpg" alt="Pink and blue clouds at sunset. " title="Photo by Jeremy Doddridge for Unsplash">
+		</figure>
+		<figure>
+			<div>
+				<div>
+					<h2>Список</h2>
+					<p>Популярных слэнгов</p>
+					<p><br><small>Новые слова <br><a target="_blank" href="https://codepen.io/wakana-k/pen/oNJxbPw">Ососбенно с Тиктока</a></small></p>
+				</div>
+			</div>
+		</figure>
+		<figure>
+			<img src="https://stockmann.ru/istk/ZAvKs5hp_Dq0HDD5NF9KNHHE-y72xzWIRLBY5vgTJ5c/rs:fill:747::1/g:no/bG9jYWw6Ly8vdXBsb2FkLy9jbXMvc3RhdGljL2Zhc2hpb24tYmxvZy9hcnRpY2xlLzY2ZDViZmZmZWVjODJmNDk4MDBiNTk4OS9ibG9jay82NmQ1YzIwNzFhOTlkY2VjNTQwOTgyZTEvYXpXSW90TDVwN1M2MjFJa3lMNmhnYkR0NHZvWGR2dGZnYlhBNDRZUS5qcGc.jpg" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC3ys6UUsp54YrFRZyFKNjXlhwlGubXHmZiI88w6QkKyNTxVpR18CrG_eFGSuOqYRUlLU&usqp=CAU" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://bhub.com.ua/wp-content/uploads/2021/09/14_izi_rus-800x533.webp" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://slovaroid.ru/uploads/images/katka.jpg" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmgWCm0jJTHkqC4imdoCZ-D-2An6eYw17U7eVOcMHR5uP39jF-OlGk4wGDWFP9EImjHx0&usqp=CAU" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://bhub.com.ua/wp-content/uploads/2021/09/12zhiza.webp?v=1632404606" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://image.mel.fm/i/R/RiUDtHj9Vd/640.png" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://img.championat.com/i/b/q/16239313221593943323.jpg" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://aif-s3.aif.ru/images/024/196/64b6aded54d813460541546199d42d3a.png" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+		<figure>
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlzRvEPyG-Eiok12eRZklZjMHd5XzshJKHEzzNI6JJWXhcmkRcarn6GiM1JEY6_TSvk1c&usqp=CAU" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+        <figure>
+			<img src="https://image.mel.fm/i/W/W9xIvYh72I/640.png" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+			<figcaption>4 PM, Autumn</figcaption>
+		</figure>
+        <figure>
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ63qYVTnYRCDgPbKhItk9k5IMW1fIuQ6LjBvDoxiEFGRkrU3Fon2SmWg-KGStk8TyZK38&usqp=CAU" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+        <figure>
+			<img src="https://you-slang.ru/img/words/6780.png" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+        <figure>
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKnwiWceJb2Tpl5WlTZGVBtxhrezdlJESCI3sWIJ3IA_APR8eEFUdSH4ShJdpZXwz_qbM&usqp=CAU" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+        <figure>
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0kSgJbkGf_mrL6vDVdQVoq_4FvdB4I5mjwuwhxZ14HHj1cctrZeS6UFd-8rJ4DPCXn9o&usqp=CAU" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+        <figure>
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5zepU7qsHCCjb2eZyBksLC2BaC6ej3wBCmg&s" alt="Heavy gray clouds in the sky. " title="Photo by Simeon Muller for Unsplash">
+		</figure>
+
+
+	</div>
+</main>
+</body>
+<script>"use strict";
+(function () {
+	window.onload = () => {
+		const obj = document.querySelector("#gallery");
+		const time = 10000;
+		function animStart() {
+			if (obj.classList.contains("active") == false) {
+				obj.classList.add("active");
+				setTimeout(() => {
+					animEnd();
+				}, time);
+			}
+		}
+		function animEnd() {
+			obj.classList.remove("active");
+			obj.offsetWidth;
+		}
+		document.addEventListener("scroll", function () {
+			// scroll or scrollend
+			animStart();
+		});
+		window.addEventListener("resize", animStart);
+		animStart();
+	};
+})();
+</script>
+</html>
